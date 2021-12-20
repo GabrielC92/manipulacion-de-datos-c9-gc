@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', {title: movie.title}) %>
+<body>
+    <%- include('partials/header') %>
+    <main>
+        <figure>
+            <img src="/img/logo-DH.png" alt="Logo Digital House">
+        </figure>
+        <%- include('partials/search') %>
+        <h1><%= movie.title %></h1>    
+        <br>
+        <p>RATING: <%= movie.rating %></p>
+        <p>AWARDS: <%= movie.awards %></p>
+        <p>LENGTH: <%= movie.length + ' min'%></p>
+        <p>RELEASE DATE: <%= movie.release_date %></p>
+        <a class="link-button" href="/movies/edit/<%= movie.id %>">
+            <button class="botonAgregar" type="button">Editar Película</button>
+        </a>
+        <a class="link-button" href="/movies/delete/<%= movie.id %>">
+            <button class="botonAgregar" type="button">Borrar Película</button>
+        </a>
+    </main>
+    <%- include('partials/scripts') %>
+</body>
+</html>
