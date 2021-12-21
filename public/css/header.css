@@ -23,11 +23,12 @@ header .burger-menu .check:checked ~ ul{
 header .burger-menu .burger{
     background-color: #d41111;
     border-radius: 8px;
-    font-size: 20px;
-    padding: 7px;
+    font-size: 22px;
+    padding: 4px 9px;
     margin: 2px;
-    color: #fff;
+    color: #000000;
     align-self: flex-end;
+    font-weight: 600;
 }
 header .burger-menu ul{
     display: none;

@@ -10,17 +10,22 @@
         <h1 class="titulo">Agregar Película</h1>
         <br>
         <section class="formulario">
-            <form action="/movies/create" method="POST">
+            <form class="style-form" action="/movies/create" method="POST">
                 <label for="title">Title </label>
-                <p><input type="text" name="title" id="" required></p>
+                <p><input type="text" name="title" id="" value="<%= locals.old && old.title ? old.title : null %>"></p>
+                <p><span class="warning"><%= locals.errors && errors.title ? errors.title.msg : null %></span></p>
                 <label for="rating">Rating </label>
-                <p><input type="number" name="rating" id="" required> </p>
+                <p><input type="number" name="rating" id="" value="<%= locals.old && old.rating ? old.rating : null %>"></p>
+                <p><span class="warning"><%= locals.errors && errors.rating ? errors.rating.msg : null %></span></p>
                 <label for="awards">Awards </label>
-                <p><input type="number" name="awards" id="" required></p>
+                <p><input type="number" name="awards" id="" value="<%= locals.old && old.awards ? old.awards : null %>"></p>
+                <p><span class="warning"><%= locals.errors && errors.awards ? errors.awards.msg : null %></span></p>
                 <label for="release_date">Release date </label>
-                <p><input type="date" name="release_date" id="" required></p>
+                <p><input type="date" name="release_date" id="" value="<%= locals.old && old.release_date ? old.release_date : null %>"></p>
+                <p><span class="warning"><%= locals.errors && errors.release_date ? errors.release_date.msg : null %></span></p>
                 <label for="length">Length </label>
-                <p><input type="number" name="length" id="" required></p>
+                <p><input type="number" name="length" id="" value="<%= locals.old && old.length ? old.length : null %>"></p>
+                <p><span class="warning"><%= locals.errors && errors.length ? errors.length.msg : null %></span></p>
         
                 <br>
                 <p> <button class="botonAgregar" type="submit">Agregar</button>

@@ -22,6 +22,20 @@ figure{
 main{
   padding: 50px;
 }
+main .style-form label{
+  margin-top: 7px;
+}
+.style-form{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
 .link-button{
   text-decoration: none;
+}
+.buscador{
+  margin: 15px auto;
+}
+.warning{
+  color: #ff0000;
 }

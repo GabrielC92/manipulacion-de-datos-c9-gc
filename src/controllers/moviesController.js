@@ -1,5 +1,6 @@
 const db = require('../database/models');
 const sequelize = db.sequelize;
+const {validationResult} = require('express-validator');
 
 //Otra forma de llamar a los modelos
 const Movies = db.Movie;
@@ -65,19 +66,28 @@ const moviesController = {
     //Aqui debemos modificar y completar lo necesario para trabajar con el CRUD
     add: (req, res) => res.render('moviesAdd'),
     create: (req, res) => {
+        let errors = validationResult(req);
         const {title,rating,awards,release_date,length} = req.body;
-        Movies.create({
-            title: title.trim(),
-            rating,
-            awards,
-            release_date,
-            length
-        })
-            .then(movie => {
-                console.log(movie);
-                res.redirect('/movies')
+
+        if (errors.isEmpty()) {
+            Movies.create({
+                title: title.trim(),
+                rating,
+                awards,
+                release_date,
+                length
             })
-            .catch(error => console.log(error));
+                .then(movie => {
+                    console.log(movie);
+                    res.redirect('/movies')
+                })
+                .catch(error => console.log(error));
+        } else {
+            return res.render('moviesAdd',{
+                errors: errors.mapped(),
+                old: req.body
+            })
+        }
     },
     edit: (req, res) => {
         Movies.findByPk(req.params.id)
@@ -87,16 +97,30 @@ const moviesController = {
             .catch(error => console.log(error));
     },
     update: (req, res) => {
-        Movies.update({
-            ...req.body
-        },
-        {
-            where: {
-                id: req.params.id
-            }
-        })
-            .then(() => res.redirect('/movies'))
-            .catch(error => console.log(error));
+        let errors = validationResult(req);
+
+        if (errors.isEmpty()) {
+            Movies.update({
+                ...req.body
+            },
+            {
+                where: {
+                    id: req.params.id
+                }
+            })
+                .then(() => res.redirect('/movies'))
+                .catch(error => console.log(error));
+        } else {
+            Movies.findByPk(req.params.id)
+                .then(Movie => {
+                    return res.render('moviesEdit',{
+                        errors: errors.mapped(),
+                        old: req.body,
+                        Movie
+                    })
+                })
+                .catch(error => console.log(error));
+        }
     },
     remove: (req, res) => {
         Movies.findByPk(req.params.id)

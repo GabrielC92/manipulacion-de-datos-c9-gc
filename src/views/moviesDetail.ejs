@@ -11,9 +11,13 @@
         <h1><%= movie.title %></h1>    
         <br>
         <p>RATING: <%= movie.rating %></p>
+        <br>
         <p>AWARDS: <%= movie.awards %></p>
+        <br>
         <p>LENGTH: <%= movie.length + ' min'%></p>
+        <br>
         <p>RELEASE DATE: <%= movie.release_date %></p>
+        <br>
         <a class="link-button" href="/movies/edit/<%= movie.id %>">
             <button class="botonAgregar" type="button">Editar Película</button>
         </a>
